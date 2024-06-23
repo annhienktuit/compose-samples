@@ -43,7 +43,6 @@ include(
     ":core:domain-testing",
     ":core:designsystem",
     ":tv",
-    ":wear",
     ":glancewidget"
 )
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
