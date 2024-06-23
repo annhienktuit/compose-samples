@@ -66,6 +66,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.min
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.example.jetcaster.R
 import com.example.jetcaster.core.domain.testing.PreviewEpisodes
@@ -137,6 +138,7 @@ fun PodcastDetailsScreen(
         topBar = {
             if (showBackButton) {
                 PodcastDetailsTopAppBar(
+                    podcast.title,
                     navigateBack = navigateBack,
                     modifier = Modifier.fillMaxWidth()
                 )
@@ -192,6 +194,9 @@ fun PodcastDetailsContent(
                 showPodcastImage = false,
                 showSummary = true
             )
+        }
+        fullWidthItem {
+            PodcastDetailsFooter(description = podcast.description)
         }
     }
 }
@@ -342,11 +347,14 @@ fun PodcastDetailsHeaderItemButtons(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun PodcastDetailsTopAppBar(
+    title: String = "Nhien",
     navigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     TopAppBar(
-        title = { },
+        title = {
+            Text(text = title, fontSize = 16.sp)
+        },
         navigationIcon = {
             IconButton(onClick = navigateBack) {
                 Icon(
@@ -357,6 +365,22 @@ fun PodcastDetailsTopAppBar(
         },
         modifier = modifier
     )
+}
+
+@Composable
+fun PodcastDetailsFooter(
+    description: String = "This is description") {
+    Column(modifier = Modifier.padding(top = 16.dp)) {
+        Text(text = description, modifier = Modifier
+            .fillMaxWidth().padding(24.dp), fontSize = 12.sp)
+    }
+
+}
+
+@Preview
+@Composable
+fun PodcastDetailsFooterPreview(description: String = PreviewPodcasts[0].description) {
+    PodcastDetailsFooter(description)
 }
 
 @Preview

@@ -29,6 +29,7 @@ import androidx.window.layout.DisplayFeature
 import com.example.jetcaster.R
 import com.example.jetcaster.ui.home.MainScreen
 import com.example.jetcaster.ui.player.PlayerScreen
+import com.example.jetcaster.ui.profile.ProfileScreen
 
 @OptIn(ExperimentalMaterial3AdaptiveApi::class)
 @Composable
@@ -56,6 +57,9 @@ fun JetcasterApp(
                     displayFeatures = displayFeatures,
                     onBackPress = appState::navigateBack
                 )
+            }
+            composable(Screen.Profile.route) {
+                ProfileScreen(windowSizeClass = adaptiveInfo.windowSizeClass)
             }
         }
     } else {

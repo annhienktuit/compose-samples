@@ -48,6 +48,8 @@ sealed class Screen(val route: String) {
         fun createRoute(podcastUri: String) = "podcast/$podcastUri"
     }
 
+    object Profile: Screen("profile")
+
     companion object {
         val ARG_PODCAST_URI = "podcastUri"
         val ARG_EPISODE_URI = "episodeUri"

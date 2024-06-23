@@ -51,6 +51,14 @@ public object JetcasterNavController {
     public fun NavController.navigateToPlaybackSpeed() {
         navigate(PlaybackSpeed.destination())
     }
+
+    public fun NavController.navigateToProfile() {
+        navigate(Profile.destination())
+    }
+}
+
+public object Profile : NavigationScreens("profile") {
+    public fun destination(): String = navRoute
 }
 
 public object YourPodcasts : NavigationScreens("yourPodcasts") {
