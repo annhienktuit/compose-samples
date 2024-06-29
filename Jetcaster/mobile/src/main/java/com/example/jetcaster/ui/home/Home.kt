@@ -146,6 +146,7 @@ data class HomeState(
     val onCategorySelected: (CategoryInfo) -> Unit,
     val navigateToPodcastDetails: (PodcastInfo) -> Unit,
     val navigateToPlayer: (EpisodeInfo) -> Unit,
+    val navigateToProfile: () -> Unit,
     val onTogglePodcastFollowed: (PodcastInfo) -> Unit,
     val onLibraryPodcastSelected: (PodcastInfo?) -> Unit,
     val onQueueEpisode: (PlayerEpisode) -> Unit,
@@ -239,6 +240,7 @@ private fun getExcludedVerticalBounds(posture: Posture, hingePolicy: HingePolicy
 fun MainScreen(
     windowSizeClass: WindowSizeClass,
     navigateToPlayer: (EpisodeInfo) -> Unit,
+    navigateToProfile: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val homeScreenUiState by viewModel.state.collectAsStateWithLifecycle()
@@ -250,6 +252,7 @@ fun MainScreen(
                 uiState = uiState,
                 windowSizeClass = windowSizeClass,
                 navigateToPlayer = navigateToPlayer,
+                navigateToProfile = navigateToProfile,
                 viewModel = viewModel,
             )
         }
@@ -300,6 +303,7 @@ private fun HomeScreenReady(
     uiState: HomeScreenUiState.Ready,
     windowSizeClass: WindowSizeClass,
     navigateToPlayer: (EpisodeInfo) -> Unit,
+    navigateToProfile: () -> Unit,
     viewModel: HomeViewModel = hiltViewModel()
 ) {
     val navigator = rememberSupportingPaneScaffoldNavigator<String>(
@@ -324,6 +328,7 @@ private fun HomeScreenReady(
             navigator.navigateTo(SupportingPaneScaffoldRole.Supporting, it.uri)
         },
         navigateToPlayer = navigateToPlayer,
+        navigateToProfile = navigateToProfile,
         onTogglePodcastFollowed = viewModel::onTogglePodcastFollowed,
         onLibraryPodcastSelected = viewModel::onLibraryPodcastSelected,
         onQueueEpisode = viewModel::onQueueEpisode
@@ -456,6 +461,7 @@ private fun HomeScreen(
                 HomeAppBar(
                     isExpanded = homeState.windowSizeClass.isCompact,
                     modifier = Modifier.fillMaxWidth(),
+                    navigateToProfile = homeState.navigateToProfile
                 )
             },
             snackbarHost = {
@@ -907,6 +913,7 @@ private fun HomeAppBarPreview() {
     JetcasterTheme {
         HomeAppBar(
             isExpanded = false,
+            navigateToProfile = {}
         )
     }
 }
@@ -935,6 +942,7 @@ private fun PreviewHome() {
             onPodcastUnfollowed = {},
             navigateToPodcastDetails = {},
             navigateToPlayer = {},
+            navigateToProfile = {},
             onHomeCategorySelected = {},
             onTogglePodcastFollowed = {},
             onLibraryPodcastSelected = {},

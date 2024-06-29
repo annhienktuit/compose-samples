@@ -75,6 +75,12 @@ class JetcasterAppState(
         isOnline = checkIfOnline()
     }
 
+    fun navigateToProfile(from: NavBackStackEntry) {
+        if (from.lifecycleIsResumed()) {
+            navController.navigate(Screen.Profile.route)
+        }
+    }
+
     fun navigateToPlayer(episodeUri: String, from: NavBackStackEntry) {
         // In order to discard duplicated navigation events, we check the Lifecycle
         if (from.lifecycleIsResumed()) {

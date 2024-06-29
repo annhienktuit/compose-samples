@@ -48,6 +48,9 @@ fun JetcasterApp(
                     windowSizeClass = adaptiveInfo.windowSizeClass,
                     navigateToPlayer = { episode ->
                         appState.navigateToPlayer(episode.uri, backStackEntry)
+                    },
+                    navigateToProfile = {
+                        appState.navigateToProfile(backStackEntry)
                     }
                 )
             }
@@ -59,7 +62,10 @@ fun JetcasterApp(
                 )
             }
             composable(Screen.Profile.route) {
-                ProfileScreen(windowSizeClass = adaptiveInfo.windowSizeClass)
+                ProfileScreen(
+                    windowSizeClass = adaptiveInfo.windowSizeClass,
+                    onBackPress = appState::navigateBack
+                )
             }
         }
     } else {
