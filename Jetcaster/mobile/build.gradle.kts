@@ -132,6 +132,8 @@ dependencies {
     implementation(libs.accompanist.adaptive)
 
     implementation(libs.coil.kt.compose)
+    implementation (libs.jakewharton.timber)
+
 
     implementation(projects.core.data)
     implementation(projects.core.designsystem)
