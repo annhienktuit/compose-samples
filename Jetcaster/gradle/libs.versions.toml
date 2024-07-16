@@ -32,6 +32,7 @@ androix-test-uiautomator = "2.3.0"
 coil = "2.6.0"
 # @keep
 compileSdk = "34"
+converterGson = "2.9.0"
 coroutines = "1.8.1"
 google-maps = "18.2.0"
 gradle-versions = "0.51.0"
@@ -50,6 +51,7 @@ material = "1.11.0"
 minSdk = "21"
 okhttp = "4.11.0"
 play-services-wearable = "18.1.0"
+retrofit = "2.9.0"
 robolectric = "4.12.1"
 roborazzi = "1.12.0"
 rome = "1.18.0"
@@ -57,6 +59,8 @@ room = "2.6.0"
 secrets = "2.0.1"
 # @keep
 targetSdk = "33"
+timber = "5.0.1'"
+timberVersion = "5.0.1"
 version-catalog-update = "0.8.4"
 
 [libraries]
@@ -133,6 +137,7 @@ androidx-wear-compose-ui-tooling = { module = "androidx.wear.compose:compose-ui-
 androidx-window = { module = "androidx.window:window", version.ref = "androidx-window" }
 androidx-window-core = { module = "androidx.window:window-core", version.ref = "androidx-window" }
 coil-kt-compose = { module = "io.coil-kt:coil-compose", version.ref = "coil" }
+converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 core-jdk-desugaring = { module = "com.android.tools:desugar_jdk_libs", version.ref = "jdkDesugar" }
 dagger-hiltandroidplugin = { module = "com.google.dagger:hilt-android-gradle-plugin", version.ref = "hilt" }
 google-android-material = { module = "com.google.android.material:material", version.ref = "material" }
@@ -151,6 +156,7 @@ horologist-images-coil = { module = "com.google.android.horologist:horologist-im
 horologist-media-data = { module = "com.google.android.horologist:horologist-media-data", version.ref = "horologist" }
 horologist-media-ui = { module = "com.google.android.horologist:horologist-media-ui", version.ref = "horologist" }
 horologist-roboscreenshots = { module = "com.google.android.horologist:horologist-roboscreenshots", version.ref = "horologist" }
+jakewharton-timber = { module = "com.jakewharton.timber:timber", version.ref = "timberVersion" }
 junit = { module = "junit:junit", version.ref = "junit" }
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib-jdk8", version.ref = "kotlin" }
 kotlinx-collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "kotlinx_immutable" }
@@ -159,12 +165,14 @@ kotlinx-coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-t
 okhttp-logging = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp" }
 okhttp3 = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 play-services-wearable = { module = "com.google.android.gms:play-services-wearable", version.ref = "play-services-wearable" }
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 robolectric = { module = "org.robolectric:robolectric", version.ref = "robolectric" }
 roborazzi = { module = "io.github.takahirom.roborazzi:roborazzi", version.ref = "roborazzi" }
 roborazzi-compose = { module = "io.github.takahirom.roborazzi:roborazzi-compose", version.ref = "roborazzi" }
 roborazzi-rule = { module = "io.github.takahirom.roborazzi:roborazzi-junit-rule", version.ref = "roborazzi" }
 rometools-modules = { module = "com.rometools:rome-modules", version.ref = "rome" }
 rometools-rome = { module = "com.rometools:rome", version.ref = "rome" }
+timber = { module = "implementation 'com.jakewharton.timber:timber", version.ref = "timber" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }

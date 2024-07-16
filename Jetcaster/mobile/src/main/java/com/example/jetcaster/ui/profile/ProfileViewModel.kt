@@ -10,6 +10,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import okhttp3.OkHttpClient
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -22,7 +23,10 @@ class ProfileViewModel  @Inject constructor(
         viewModelScope.launch {
             networkFetcher("https://api.npoint.io/e1eada73a68dd014364f")
                 .catch { e -> _userData.postValue(NetworkResponse.Error(e)) }
-                .collect { response -> _userData.postValue(response) }
+                .collect { response ->
+                    Timber.e("nhiennha $response")
+                    _userData.postValue(response)
+                }
         }
     }
 }

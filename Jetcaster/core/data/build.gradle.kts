@@ -53,6 +53,8 @@ dependencies {
     // Networking
     implementation(libs.okhttp3)
     implementation(libs.okhttp.logging)
+    implementation (libs.retrofit)
+    implementation (libs.converter.gson)
 
     // Database
     implementation(libs.androidx.room.runtime)
@@ -61,6 +63,9 @@ dependencies {
 
     implementation(libs.rometools.rome)
     implementation(libs.rometools.modules)
+
+    //Logging
+    implementation (libs.jakewharton.timber)
 
     coreLibraryDesugaring(libs.core.jdk.desugaring)
 
