@@ -135,7 +135,6 @@ dependencies {
     implementation (libs.jakewharton.timber)
 
 
-
     implementation(projects.core.data)
     implementation(projects.core.designsystem)
     implementation(projects.core.domain)

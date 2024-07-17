@@ -10,6 +10,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,22 +30,27 @@ import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import com.example.jetcaster.core.data.database.model.ProfileInfo
+import timber.log.Timber
 
 @Composable
 fun ProfileScreen(
+    userId: String,
     modifier: Modifier = Modifier,
     windowSizeClass: WindowSizeClass,
     onBackPress: () -> Unit,
     viewModel: ProfileViewModel = hiltViewModel(),
 ) {
-    ProfileHeader(
-        profileInfo = ProfileInfo(
-            "1",
-            "Maguire",
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZdq8BpP8g-6ArJZxW8OqyLzWfeaIJIK-5Lw&s"
-        ),
-        modifier = modifier.statusBarsPadding()
-    )
+    LaunchedEffect(userId) {
+        Timber.e("nhiennha fetch")
+        viewModel.fetchProfileInfo(userId)
+    }
+    Timber.e("nhiennha ${viewModel.profileInfo.collectAsState().value}")
+//    viewModel.profileInfo.collectAsState().value?.let {
+//        ProfileHeader(
+//        profileInfo = it,
+//        modifier = modifier.statusBarsPadding()
+//    )
+//    }
 }
 
 @Composable
@@ -67,7 +74,9 @@ fun ProfileHeader(
             painter = imageLoader,
             contentDescription = "Avatar",
             contentScale = ContentScale.Crop,
-            modifier = modifier.size(168.dp).clip(CircleShape),
+            modifier = modifier
+                .size(168.dp)
+                .clip(CircleShape),
         )
         Text(
             text = profileInfo.name,

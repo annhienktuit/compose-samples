@@ -14,7 +14,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
-import okhttp3.OkHttpClient
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -24,11 +24,14 @@ class ProfileViewModel @Inject constructor(
     private val _profileInfo = MutableStateFlow<ProfileInfo?>(null)
     val profileInfo: StateFlow<ProfileInfo?> get() = _profileInfo
 
-    init {
+    fun fetchProfileInfo(userId: String) {
         viewModelScope.launch {
-            getProfileInfoUseCase("e1eada73a68dd014364f").collect { profileInfo ->
-                _profileInfo.value = profileInfo
-            }
+            getProfileInfoUseCase(userId)
+                .catch { e -> Timber.e("nhiennha error $e") }
+                .collect { profileInfo ->
+                    Timber.e("nhiennha collect $profileInfo")
+                    _profileInfo.value = profileInfo
+                }
         }
     }
 }

@@ -30,6 +30,7 @@ import com.example.jetcaster.core.data.database.dao.PodcastFollowedEntryDao
 import com.example.jetcaster.core.data.database.dao.PodcastsDao
 import com.example.jetcaster.core.data.database.dao.TransactionRunner
 import com.example.jetcaster.core.data.network.ApiService
+import com.example.jetcaster.core.data.network.LoggingInterceptor
 import com.example.jetcaster.core.data.repository.CategoryStore
 import com.example.jetcaster.core.data.repository.EpisodeStore
 import com.example.jetcaster.core.data.repository.LocalCategoryStore
@@ -50,6 +51,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import okhttp3.logging.LoggingEventListener
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -57,6 +59,11 @@ import retrofit2.converter.gson.GsonConverterFactory
 @Module
 @InstallIn(SingletonComponent::class)
 object DataDiModule {
+    @Provides
+    @Singleton
+    fun provideLoggingInterceptor(): LoggingInterceptor {
+        return LoggingInterceptor()
+    }
 
     @Provides
     @Singleton
@@ -174,8 +181,14 @@ object DataDiModule {
     @Provides
     @Singleton
     fun provideApiService(): ApiService {
+        val loggingInterceptor = LoggingInterceptor()
+
+        val okHttpClient = OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
         return Retrofit.Builder()
             .baseUrl("https://api.npoint.io/")
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(ApiService::class.java)

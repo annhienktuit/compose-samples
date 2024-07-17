@@ -63,6 +63,7 @@ fun JetcasterApp(
             }
             composable(Screen.Profile.route) {
                 ProfileScreen(
+                    userId = "e1eada73a68dd014364f",
                     windowSizeClass = adaptiveInfo.windowSizeClass,
                     onBackPress = appState::navigateBack
                 )
