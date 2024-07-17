@@ -1,4 +1,4 @@
-package com.example.jetcaster.core.model
+package com.example.jetcaster.core.data.database.model
 
 /**
  * Created by nhiennha on 23/06/2024.

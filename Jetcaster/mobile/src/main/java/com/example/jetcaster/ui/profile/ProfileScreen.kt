@@ -27,7 +27,7 @@ import androidx.window.core.layout.WindowSizeClass
 import coil.compose.AsyncImagePainter
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
-import com.example.jetcaster.core.model.ProfileInfo
+import com.example.jetcaster.core.data.database.model.ProfileInfo
 
 @Composable
 fun ProfileScreen(

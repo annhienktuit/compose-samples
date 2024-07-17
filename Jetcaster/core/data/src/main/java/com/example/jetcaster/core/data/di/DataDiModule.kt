@@ -29,12 +29,15 @@ import com.example.jetcaster.core.data.database.dao.PodcastCategoryEntryDao
 import com.example.jetcaster.core.data.database.dao.PodcastFollowedEntryDao
 import com.example.jetcaster.core.data.database.dao.PodcastsDao
 import com.example.jetcaster.core.data.database.dao.TransactionRunner
+import com.example.jetcaster.core.data.network.ApiService
 import com.example.jetcaster.core.data.repository.CategoryStore
 import com.example.jetcaster.core.data.repository.EpisodeStore
 import com.example.jetcaster.core.data.repository.LocalCategoryStore
 import com.example.jetcaster.core.data.repository.LocalEpisodeStore
 import com.example.jetcaster.core.data.repository.LocalPodcastStore
 import com.example.jetcaster.core.data.repository.PodcastStore
+import com.example.jetcaster.core.data.repository.ProfileInfoStore
+import com.example.jetcaster.core.data.repository.RemoteProfileInfoStore
 import com.rometools.rome.io.SyndFeedInput
 import dagger.Module
 import dagger.Provides
@@ -48,6 +51,8 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.LoggingEventListener
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -165,4 +170,20 @@ object DataDiModule {
         categoriesDao = categoriesDao,
         categoryEntryDao = podcastCategoryEntryDao,
     )
+
+    @Provides
+    @Singleton
+    fun provideApiService(): ApiService {
+        return Retrofit.Builder()
+            .baseUrl("https://api.npoint.io/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(ApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideProfileInfoStore(apiService: ApiService): ProfileInfoStore {
+        return RemoteProfileInfoStore(apiService)
+    }
 }
